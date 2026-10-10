@@ -1,0 +1,156 @@
+@use '../navbar/navbar' as *;
+
+
+section{
+padding: 0px;
+margin: 0px;
+height: max-content;
+width: 100%;
+position: relative;
+text-align: center;
+
+
+.hero {
+  position: relative;
+
+color: white;
+      height: calc(100svh - #{$navbar});
+  background:
+    radial-gradient(
+      circle at 50% 5%,
+      rgba(48, 72, 24, 0.30) 0%,
+      rgba(25, 40, 16, 0.15) 25%,
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 15% 45%,
+      rgba(35, 60, 20, 0.12) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 85% 40%,
+      rgba(40, 65, 20, 0.12) 0%,
+      transparent 45%
+    ),
+    #050605;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+
+    width: 700px;
+    height: 500px;
+
+    top: -200px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: radial-gradient(
+      circle,
+      rgba(60, 90, 25, 0.22),
+      transparent 70%
+    );
+
+    filter: blur(100px);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+
+    width: 500px;
+    height: 500px;
+
+    right: -200px;
+    top: 20%;
+
+    background: radial-gradient(
+      circle,
+      rgba(45, 70, 20, 0.14),
+      transparent 70%
+    );
+
+    filter: blur(120px);
+    pointer-events: none;
+  }
+
+  padding-top: $navbar;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  // Keep your actual content above the gradients
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+
+  .hero-title{
+    font-family: $heading;
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    font-size:58px;
+    text-align: center;
+    margin-bottom: 0px;
+    width: 100%;
+
+    em{
+        font-style: italic;
+    }
+  }
+
+  h3{
+    font-family: $body;
+    font-weight:200;
+    color: grey;
+    font-size: 18px;
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+
+
+      button{
+        width:200px;
+        padding: 15px 10px;
+        border-radius: 24px;
+        outline: none;
+        border: 0px;
+        background: linear-gradient(to right, rgb(79, 195, 36),green);
+        font-weight: 600;
+        transition: background 0.3s, color 0.3s;
+                color: white;
+        font-family: $body;
+        font-weight: 400;
+    }
+
+    button:hover{
+          background: linear-gradient(to right, grey,white);
+        color: black;
+              transition: background 0.3s, color 0.3s;
+
+    }
+
+    
+
+
+}
+
+    img{
+        width: 80%;
+        height: 80vh;
+        object-fit:fill;
+        margin-top: -22%;
+        z-index: 1;
+        position: relative;
+        border-radius: 23px;
+       box-shadow: rgba(0, 0, 0, 0.15) 4.4px 4.4px 7.2px;
+
+    }
+}

@@ -1,0 +1,47 @@
+<main>
+  <section class="leftsection">
+    <h1 class="header">Smarter Insights For better Health Outcomes</h1>
+    <p class="body">Our platform combines neuroscience, data, and AI to support early detection and personalized care</p>
+
+    <div class="accordion">
+      <div class="item" [class.open]="openIndex === 0">
+        <div class="header" (click)="toggle(0)">
+          <span class="heading">Early Detection</span>
+          <span class="icon">{{ openIndex === 0 ? '—' : '+' }}</span>
+        </div>
+        <div class="content">
+          <p>
+            Catch early signs of Alzheimer's, Parkinson's, and other neurological conditions before
+            symptoms appear
+          </p>
+        </div>
+      </div>
+
+      <div class="item" [class.open]="openIndex === 1">
+        <div class="header" (click)="toggle(1)">
+          <span class="heading">Personalized Risk Analysis</span>
+          <span class="icon">{{ openIndex === 1 ? '—' : '+' }}</span>
+        </div>
+        <div class="content second">
+          <p>Get accurate results and warnings based on your data to prevent risky breakdowns</p>
+        </div>
+      </div>
+
+      <div class="item" [class.open]="openIndex === 3">
+        <div class="header" (click)="toggle(3)">
+          <span class="heading">Actionable Insights</span>
+          <span class="icon">{{ openIndex === 3 ? '—' : '+' }}</span>
+        </div>
+        <div class="content second">
+          <p>
+            Schedule Treatment and check up with your personal Doctor based on Results we provided
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="rightsection">
+    <img src="avatar.jpg" alt="">
+  </section>
+</main>

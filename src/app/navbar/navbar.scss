@@ -1,0 +1,77 @@
+$heading: 'Georgia', 'Times New Roman', serif;
+$body: 'Segoe UI', 'Arial', sans-serif;
+$navbar:100px;
+.navbar {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 1;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+padding-top: 0px;
+justify-content: space-between;
+height: $navbar;
+
+  .leftnav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    width: 25%;
+
+    p {
+      font-size: 28px;
+      font-weight: 400;
+      font-family: $heading;
+    }
+  }
+
+  .middlenav{
+    display: flex;
+    align-items: center;
+    width: 50%;
+    justify-content: center;
+    font-family: $body;
+    font-weight: 400;
+    ul{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30px;
+    list-style: none;
+    }
+  }
+
+  .rightnav{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 25%;
+    font-family: $body;
+
+    button{
+        width:150px;
+        padding: 15px 10px;
+        border-radius: 24px;
+        outline: none;
+        border: 0px;
+          background: linear-gradient(to right, grey,white);
+        font-weight: 600;
+        transition: background 0.3s, color 0.3s;
+        font-family: $body;
+        font-weight: 400;
+        color: black;
+    }
+
+    button:hover{
+           background: linear-gradient(to right, rgb(79, 195, 36),green);
+        color: white;
+              transition: background 0.3s, color 0.3s;
+
+    }
+  }
+}
