@@ -1,162 +1,166 @@
-@use "../navbar/navbar.scss" as *;
+@use '../navbar/navbar.scss' as *;
 
 $progress-color: #34c759;
 $track-color: rgba(255, 255, 255, 0.12);
 $dot-size: 12px;
 $line-height: 2px;
-main{
-    padding: 0px 5%;
-    display: flex;
-    justify-content: center;
-    gap: 25%;
-    margin-top: 80px;
-    align-items: center;
-    height: max-content;
+main {
+  padding: 0px 5%;
+  display: flex;
+  justify-content: center;
+  gap: 25%;
+  margin-top: 80px;
+  align-items: center;
+  height: max-content;
 
-    .leftsection{
-          width: 35%;
-        h1.header{
-            font-family: $heading;
-            font-size: 32px;
-            font-weight: 600;
-        }
-
-        p.body{
-            font-family: $body;
-           font-weight: 400;
-           margin: 0;
-      color: #787878;
-      line-height: 1.2;
-        }
-
-.accordion{
-    font-family: $heading;
-    margin-top: 20px;
-.item {
-  .header {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 0;
-    cursor: pointer;
-    font-weight: 500;
-
-    .icon{
-        font-size: 28px;
-        font-weight: bold;
+  .leftsection {
+    width: 35%;
+    h1.header {
+      font-family: $heading;
+      font-size: 32px;
+      font-weight: 600;
     }
 
-    .heading{
-        font-size: 24px;
-    }
-  }
-
-  .content {
-    $progress-left: 20%;
-    $progress-width: 20%;
-
-    interpolate-size: allow-keywords;
-    font-family: $body;
-    position: relative;
-    height: 0;
-    transition: height 0.3s ease;
-    overflow: hidden;
-    border-bottom: 1px solid rgba(0, 0, 0,0.1);
-
-    &::before {
-      content: '';
-      position: absolute;
-      left: $progress-left;
-      bottom: -5px;
-      width: $dot-size;
-      height: $dot-size;
-      border-radius: 50%;
-      background: $progress-color;
-      box-shadow: 0 0 0 4px rgba(52, 199, 89, 0.18);
-      opacity: 0;
-      transform: scale(0.4);
-      transition: opacity 0.25s ease 0.12s, transform 0.35s ease 0.12s;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: $line-height;
-      border-radius: 999px;
-      background: linear-gradient(
-        90deg,
-        $progress-color 0,
-        $progress-color $progress-width,
-        $track-color $progress-width,
-        $track-color 100%
-      );
-      opacity: 0;
-      transform: scaleX(0.1);
-      transform-origin: left center;
-      transition: opacity 0.25s ease, transform 0.45s ease;
-      pointer-events: none;
-    }
-
-    p {
-      overflow: hidden;
+    p.body {
+      font-family: $body;
+      font-weight: 400;
       margin: 0;
       color: #787878;
+      line-height: 1.2;
+    }
+
+    .accordion {
+      font-family: $heading;
+      margin-top: 20px;
+      .item {
+        .header {
+          display: flex;
+          justify-content: space-between;
+          padding: 15px 0;
+          cursor: pointer;
+          font-weight: 500;
+
+          .icon {
+            font-size: 28px;
+            font-weight: bold;
+          }
+
+          .heading {
+            font-size: 24px;
+          }
+        }
+
+        .content {
+          $progress-left: 20%;
+          $progress-width: 20%;
+
+          interpolate-size: allow-keywords;
+          font-family: $body;
+          position: relative;
+          height: 0;
+          transition: height 0.3s ease;
+          overflow: hidden;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+          &::before {
+            content: '';
+            position: absolute;
+            left: $progress-left;
+            bottom: -5px;
+            width: $dot-size;
+            height: $dot-size;
+            border-radius: 50%;
+            background: $progress-color;
+            box-shadow: 0 0 0 4px rgba(52, 199, 89, 0.18);
+            opacity: 0;
+            transform: scale(0.4);
+            transition:
+              opacity 0.25s ease 0.12s,
+              transform 0.35s ease 0.12s;
+            z-index: 2;
+            pointer-events: none;
+          }
+
+          &::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: $line-height;
+            border-radius: 999px;
+            background: linear-gradient(
+              90deg,
+              $progress-color 0,
+              $progress-color $progress-width,
+              $track-color $progress-width,
+              $track-color 100%
+            );
+            opacity: 0;
+            transform: scaleX(0.1);
+            transform-origin: left center;
+            transition:
+              opacity 0.25s ease,
+              transform 0.45s ease;
+            pointer-events: none;
+          }
+
+          p {
+            overflow: hidden;
+            margin: 0;
+            color: #787878;
+          }
+        }
+
+        &.open .content {
+          height: max-content;
+          width: 100%;
+          padding-bottom: 15px;
+          border-bottom: 1px solid rgb(191, 191, 191);
+          position: relative;
+          overflow: visible;
+
+          &::before,
+          &::after {
+            opacity: 1;
+          }
+
+          &::before {
+            transform: scale(1);
+          }
+
+          &::after {
+            transform: scaleX(1);
+          }
+        }
+
+        .content.second {
+          $progress-left: 50%;
+          $progress-width: 50%;
+
+          &::before {
+            left: $progress-left;
+          }
+
+          &::after {
+            background: linear-gradient(
+              90deg,
+              $progress-color 0,
+              $progress-color $progress-width,
+              $track-color $progress-width,
+              $track-color 100%
+            );
+          }
+        }
+      }
     }
   }
 
-  &.open .content {
-    height: max-content;
-    width: 100%;
-    padding-bottom: 15px;
-    border-bottom: 1px solid rgb(191, 191, 191);
-    position: relative;
-    overflow: visible;
-
-    &::before,
-    &::after {
-      opacity: 1;
-    }
-
-    &::before {
-      transform: scale(1);
-    }
-
-    &::after {
-      transform: scaleX(1);
-    }
-  }
-
-  .content.second {
-    $progress-left: 50%;
-    $progress-width: 50%;
-
-    &::before {
-      left: $progress-left;
-    }
-
-    &::after {
-      background: linear-gradient(
-        90deg,
-        $progress-color 0,
-        $progress-color $progress-width,
-        $track-color $progress-width,
-        $track-color 100%
-      );
-    }
-  }
-}
-}
-    }
-
-.rightsection{
+  .rightsection {
     width: 35%;
-    img{
-        width: 100%;
-        height: 70vh;
+    img {
+      width: 100%;
+      height: 70vh;
     }
-}
+  }
 }

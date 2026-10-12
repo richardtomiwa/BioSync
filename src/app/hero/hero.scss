@@ -15,6 +15,7 @@ text-align: center;
 
 color: white;
       height: calc(100svh - #{$navbar});
+      max-height: 800px;
   background:
     radial-gradient(
       circle at 50% 5%,
