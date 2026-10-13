@@ -2,12 +2,12 @@ $heading: 'Georgia', 'Times New Roman', serif;
 $body: 'Segoe UI', 'Arial', sans-serif;
 $navbar:100px;
 .navbar {
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   width: 100%;
   box-sizing: border-box;
-  z-index: 1;
+  z-index: 3;
   color: white;
   display: flex;
   flex-direction: row;
@@ -15,6 +15,10 @@ $navbar:100px;
 
 justify-content: space-between;
 height: $navbar;
+
+.mobilenav{
+  display: none;
+}
 
   .leftnav {
     display: flex;
@@ -73,5 +77,189 @@ height: $navbar;
               transition: background 0.3s, color 0.3s;
 
     }
+  }
+}
+
+@media (max-width:767px) {
+  .navbar{
+    z-index: 2;
+  .large{
+    display: none;
+  }
+
+  .backdrop{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 2;
+  }
+
+  .mobilenav{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-family: $body;
+
+    .leftmobile{
+      display: flex;
+      gap: 10px;
+      justify-content: start;
+      align-items: center;
+
+      p{
+        font-size: 28px;
+      }
+    }
+
+    .rightmobile{
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      position: relative;
+
+      .menu{
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        color: black;
+        background-color: white;
+        height: 100dvh;
+        position: fixed;
+        top: 0px;
+        right: -20px;
+        transform: translateX(100%);
+        width: 60svw;
+        justify-content: space-between;
+        transition: transform 0.3s;
+        z-index: 3;
+
+        .top{
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          gap: 20px;
+          .controller{
+            display: flex;
+            justify-content: end;
+            align-items: end;
+            padding-top: 20px;
+            padding-right: 20px;
+          }
+
+          .menulinks{
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            list-style: none;
+            gap: 20px;
+            width: 100%;
+            padding: 10px;
+
+            li{
+              display: flex;
+              justify-content: space-between;
+            }
+
+            button{
+              background-color: black;
+              color: white;
+              padding: 10px;
+              border: none;
+              border-radius: 4px;
+            }
+          }
+        }
+
+        .bottom{
+          ul{
+            display: flex;
+            list-style: none;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0px;
+            gap: 10px;
+          }
+        }
+
+      }
+
+      .menu.open{
+        transform: translateX(calc(0% - 20px));
+        transition: transform 0.3s;
+      }
+    }
+
+  }
+
+
+}
+
+
+}
+
+
+.navbar.scrolled{
+    background:
+    radial-gradient(
+      circle at 50% 5%,
+      rgba(48, 72, 24, 0.30) 0%,
+      rgba(25, 40, 16, 0.15) 25%,
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 15% 45%,
+      rgba(35, 60, 20, 0.12) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 85% 40%,
+      rgba(40, 65, 20, 0.12) 0%,
+      transparent 45%
+    ),
+    #050605;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: 0;
+
+    width: 700px;
+    height: 500px;
+
+    top: -200px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: radial-gradient(
+      circle,
+      rgba(60, 90, 25, 0.22),
+      transparent 70%
+    );
+
+    filter: blur(100px);
+    pointer-events: none;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+
+    width: 500px;
+    height: 500px;
+
+    right: -200px;
+    top: 20%;
+
+    background: radial-gradient(
+      circle,
+      rgba(45, 70, 20, 0.14),
+      transparent 70%
+    );
+
+    filter: blur(120px);
+    pointer-events: none;
   }
 }

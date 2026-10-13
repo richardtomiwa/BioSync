@@ -4,7 +4,7 @@
     <div class="item" [class.open]="openIndex === 0">
       <div class="header" (click)="toggle(0)">
         <span class="heading">Is this tool a replacement for medical advice?</span>
-        <span class="icon">{{ openIndex === 0 ? '—' : '+' }}</span>
+        <span class="icon">{{ openIndex === 0 ? '-' : '+' }}</span>
       </div>
       <div class="content">
         <p>
@@ -17,7 +17,7 @@
     <div class="item" [class.open]="openIndex === 1">
       <div class="header" (click)="toggle(1)">
         <span class="heading">How accurate is the AI analysis?</span>
-        <span class="icon">{{ openIndex === 1 ? '—' : '+' }}</span>
+        <span class="icon">{{ openIndex === 1 ? '-' : '+' }}</span>
       </div>
       <div class="content second">
         <p>Get accurate results and warnings based on your data to prevent risky breakdowns</p>
@@ -27,7 +27,7 @@
     <div class="item" [class.open]="openIndex === 3">
       <div class="header" (click)="toggle(3)">
         <span class="heading">How often should I run a scan?</span>
-        <span class="icon">{{ openIndex === 3 ? '—' : '+' }}</span>
+        <span class="icon">{{ openIndex === 3 ? '-' : '+' }}</span>
       </div>
       <div class="content second">
         <p>
@@ -39,7 +39,7 @@
         <div class="item" [class.open]="openIndex === 4">
       <div class="header" (click)="toggle(4)">
         <span class="heading">Can this detect early signs of Alzheimer's or Parkinson's</span>
-        <span class="icon">{{ openIndex === 4 ? '—' : '+' }}</span>
+        <span class="icon">{{ openIndex === 4 ? '-' : '+' }}</span>
       </div>
       <div class="content second">
         <p>
@@ -51,7 +51,7 @@
         <div class="item" [class.open]="openIndex === 5">
       <div class="header" (click)="toggle(5)">
         <span class="heading">What types of health data does the dashboard analyze?</span>
-        <span class="icon">{{ openIndex === 5 ? '—' : '+' }}</span>
+        <span class="icon">{{ openIndex === 5 ? '-' : '+' }}</span>
       </div>
       <div class="content second">
         <p>

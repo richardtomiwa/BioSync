@@ -8,7 +8,7 @@ main {
   padding: 0px 5%;
   display: flex;
   justify-content: center;
-  gap: 25%;
+  gap: 10px;
   margin-top: 80px;
   align-items: center;
   height: max-content;
@@ -163,4 +163,29 @@ main {
       height: 70vh;
     }
   }
+}
+
+
+@media (max-width:767px) {
+
+main {
+
+  flex-direction: column;
+
+
+  .leftsection {
+    width: 100%;
+   
+  }
+
+  .rightsection {
+    width: 100%;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+
 }

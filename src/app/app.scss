@@ -4,3 +4,8 @@
     background-color: rgb(249, 255, 255);
     overflow-x: hidden;
 }
+
+body.no-scroll{
+    overflow: hidden;
+    height: 100vh;
+}
