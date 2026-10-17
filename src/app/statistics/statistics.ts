@@ -21,21 +21,30 @@ export class Statistics implements AfterViewInit {
       return;
     }
 
-    new Swiper(this.swiperRef.nativeElement, {
-      modules: [EffectCards],
-      effect: 'cards',
-      speed: 600,
-      cardsEffect: {
-        perSlideOffset: 10,
-        slideShadows: false,
-        perSlideRotate: 2,
-      },
-      grabCursor: true,
-      loop: false,
-      centeredSlides: true,
-      initialSlide: 1,
-      watchOverflow: true,
-    });
+    if (this.swiperRef?.nativeElement) {
+      requestAnimationFrame(() => {
+        new Swiper(this.swiperRef.nativeElement, {
+          modules: [EffectCards],
+          effect: 'cards',
+          speed: 600,
+          slidesPerView: 1,
+          spaceBetween: 0,
+          cardsEffect: {
+            perSlideOffset: 10,
+            slideShadows: false,
+            perSlideRotate: 2,
+          },
+          grabCursor: true,
+          loop: false,
+          centeredSlides: true,
+          initialSlide: 1,
+          watchOverflow: true,
+          watchSlidesProgress: true,
+          observer: true,
+          observeParents: true,
+        });
+      });
+    }
 
     const wrap = this.arcWrap?.nativeElement;
     if (!wrap) {
