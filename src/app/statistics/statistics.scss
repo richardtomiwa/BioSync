@@ -198,6 +198,7 @@ main {
         stroke-dashoffset: 0;
         transform: translateY(0);
         filter: drop-shadow(0 6px 12px rgba(122, 204, 136, 0.34));
+        will-change: stroke-dasharray;
       }
 
       .dot {
@@ -321,11 +322,13 @@ main {
 
       .up .scroll-container {
         animation: scrollUp 20s linear infinite;
+        will-change: transform;
         
       }
 
       .down .reverse {
         animation: scrollUp reverse 20s linear infinite;
+        will-change: transform;
       }
     }
 

@@ -1,4 +1,4 @@
-import { Component, HostListener,Inject, Renderer2 } from '@angular/core';
+import { Component, HostListener,Inject, OnInit, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/core';
 @Component({
   imports: [],
@@ -6,7 +6,7 @@ import { DOCUMENT } from '@angular/core';
   styleUrl: './navbar.scss',
   templateUrl: './navbar.html',
 })
-export class Navbar {
+export class Navbar implements OnInit{
   ismenuopen=false;
   isscrolled=false;
 
@@ -15,10 +15,18 @@ export class Navbar {
     private renderer:Renderer2
   ){}
 
+  ngOnInit(){
+    if (typeof window !== 'undefined') {
+      this.checkscroll();
+    }
+  }
+
   @HostListener('window:scroll',[])
   
   onwindowscroll(){
-    this.isscrolled=window.scrollY>50;
+    if (typeof window !== 'undefined') {
+      this.checkscroll();
+    }
   }
 
   togglemenu(){
@@ -31,6 +39,14 @@ export class Navbar {
     this.ismenuopen=false;
        this.setscrolllock(false)
 
+  }
+
+  private checkscroll(){
+    if (typeof window === 'undefined') {
+      this.isscrolled = false;
+      return;
+    }
+    this.isscrolled = window.scrollY > 50;
   }
 
   private setscrolllock(lock:boolean){

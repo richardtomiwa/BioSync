@@ -24,15 +24,17 @@ export class Statistics implements AfterViewInit {
     new Swiper(this.swiperRef.nativeElement, {
       modules: [EffectCards],
       effect: 'cards',
-      cardsEffect:{
-        perSlideOffset:15,
-        slideShadows:false,
-        perSlideRotate:4,
+      speed: 600,
+      cardsEffect: {
+        perSlideOffset: 10,
+        slideShadows: false,
+        perSlideRotate: 2,
       },
       grabCursor: true,
       loop: false,
-      centeredSlides:true,
-      initialSlide:1,
+      centeredSlides: true,
+      initialSlide: 1,
+      watchOverflow: true,
     });
 
     const wrap = this.arcWrap?.nativeElement;
