@@ -14,11 +14,13 @@ export class Statistics implements AfterViewInit, OnDestroy {
   @ViewChild('swiperRef') swiperRef!: ElementRef<HTMLDivElement>;
   @ViewChild('arcWrap') arcWrap!: ElementRef<HTMLDivElement>;
   @ViewChild('carouselRef') carouselRef!: ElementRef<HTMLDivElement>;
+  @ViewChild('meterStack') meterStack!: ElementRef<HTMLDivElement>;
 
   private hasAnimated = false;
   private swiper?: Swiper;
   private swiperObserver?: IntersectionObserver;
   private carouselObserver?: IntersectionObserver;
+  private meterObserver?: IntersectionObserver;
 
   ngAfterViewInit(): void {
     if (typeof window === 'undefined' || typeof document === 'undefined') {
@@ -27,6 +29,7 @@ export class Statistics implements AfterViewInit, OnDestroy {
 
     this.observeSwiper();
     this.observeCarousel();
+    this.observeMeters();
 
     const wrap = this.arcWrap?.nativeElement;
     if (!wrap) {
@@ -61,6 +64,7 @@ export class Statistics implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.swiperObserver?.disconnect();
     this.carouselObserver?.disconnect();
+    this.meterObserver?.disconnect();
     this.swiper?.destroy(true, true);
   }
 
@@ -122,6 +126,25 @@ export class Statistics implements AfterViewInit, OnDestroy {
       });
     }, { threshold: 0, rootMargin: '120px 0px' });
     this.carouselObserver.observe(element);
+  }
+
+  private observeMeters(): void {
+    const element = this.meterStack?.nativeElement;
+    if (!element) {
+      return;
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      element.classList.add('is-animated');
+      return;
+    }
+
+    this.meterObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        element.classList.toggle('is-animated', entry.isIntersecting);
+      });
+    }, { threshold: 0, rootMargin: '120px 0px' });
+    this.meterObserver.observe(element);
   }
 
   private startArcAnimation(): void {

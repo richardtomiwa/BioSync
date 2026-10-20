@@ -102,7 +102,7 @@
         <p>Early-stage neurodegenerative conditions identified before clinical symptoms appeared</p>
       </div>
 
-      <div class="meter-stack">
+      <div class="meter-stack" #meterStack>
         <div class="meter-block">
           <div class="meter-head">
             <span class="meter-value">May 2025</span>
@@ -117,8 +117,10 @@
               </linearGradient>
             </defs>
             <rect x="10" y="12" width="180" height="10" rx="5" class="meter-track" />
-            <rect x="10" y="12" width="171" height="10" rx="5" class="meter-fill fill-95" />
-            <circle cx="181" cy="17" r="5" class="meter-dot" />
+            <g class="meter-motion">
+              <rect x="10" y="12" width="171" height="10" rx="5" class="meter-fill fill-95" />
+              <circle cx="181" cy="17" r="5" class="meter-dot" />
+            </g>
           </svg>
         </div>
 
@@ -136,8 +138,10 @@
               </linearGradient>
             </defs>
             <rect x="10" y="12" width="180" height="10" rx="5" class="meter-track" />
-            <rect x="10" y="12" width="99" height="10" rx="5" class="meter-fill fill-55" />
-            <circle cx="109" cy="17" r="5" class="meter-dot" />
+            <g class="meter-motion">
+              <rect x="10" y="12" width="99" height="10" rx="5" class="meter-fill fill-55" />
+              <circle cx="109" cy="17" r="5" class="meter-dot" />
+            </g>
           </svg>
         </div>
       </div>

@@ -473,6 +473,22 @@ main {
       filter: drop-shadow(0 6px 12px rgba(122, 204, 136, 0.22));
     }
 
+    .meter-motion {
+      animation: meter-drift 3.6s ease-in-out infinite alternate;
+      animation-play-state: paused;
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .meter-block:nth-child(2) .meter-motion {
+      animation-delay: -1.8s;
+    }
+
+    .meter-stack.is-animated .meter-motion {
+      animation-play-state: running;
+      will-change: transform;
+    }
+
     .fill-95 {
       fill: url(#meterGradient95);
     }
@@ -503,6 +519,16 @@ main {
   }
 }
 
+@keyframes meter-drift {
+  from {
+    transform: translateX(-4px);
+  }
+
+  to {
+    transform: translateX(4px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .parent .div3 .arc {
     .progress {
@@ -526,6 +552,11 @@ main {
       animation: none;
       transform: none;
     }
+  }
+
+  .parent .div5 .meter-motion {
+    animation: none;
+    transform: none;
   }
 }
 
