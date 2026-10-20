@@ -81,7 +81,7 @@ export class Statistics implements AfterViewInit, OnDestroy {
         speed: 450,
         slidesPerView: 1,
         cardsEffect: {
-          perSlideOffset: 8,
+          perSlideOffset: 12,
           perSlideRotate: 1,
           slideShadows: false,
         },
