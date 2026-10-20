@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import Swiper from 'swiper';
 import { EffectCards } from 'swiper/modules';
 import 'swiper/css';
@@ -10,41 +10,23 @@ import 'swiper/css/effect-cards';
   templateUrl: './statistics.html',
   imports:[]
 })
-export class Statistics implements AfterViewInit {
+export class Statistics implements AfterViewInit, OnDestroy {
   @ViewChild('swiperRef') swiperRef!: ElementRef<HTMLDivElement>;
   @ViewChild('arcWrap') arcWrap!: ElementRef<HTMLDivElement>;
+  @ViewChild('carouselRef') carouselRef!: ElementRef<HTMLDivElement>;
 
   private hasAnimated = false;
+  private swiper?: Swiper;
+  private swiperObserver?: IntersectionObserver;
+  private carouselObserver?: IntersectionObserver;
 
   ngAfterViewInit(): void {
     if (typeof window === 'undefined' || typeof document === 'undefined') {
       return;
     }
 
-    if (this.swiperRef?.nativeElement) {
-      requestAnimationFrame(() => {
-        new Swiper(this.swiperRef.nativeElement, {
-          modules: [EffectCards],
-          effect: 'cards',
-          speed: 600,
-          slidesPerView: 1,
-          spaceBetween: 0,
-          cardsEffect: {
-            perSlideOffset: 10,
-            slideShadows: false,
-            perSlideRotate: 2,
-          },
-          grabCursor: true,
-          loop: false,
-          centeredSlides: true,
-          initialSlide: 1,
-          watchOverflow: true,
-          watchSlidesProgress: true,
-          observer: true,
-          observeParents: true,
-        });
-      });
-    }
+    this.observeSwiper();
+    this.observeCarousel();
 
     const wrap = this.arcWrap?.nativeElement;
     if (!wrap) {
@@ -56,7 +38,7 @@ export class Statistics implements AfterViewInit {
       const isVisible = rect.top < window.innerHeight + 80 && rect.bottom > -80;
 
       if (isVisible && !this.hasAnimated) {
-        this.animateArc();
+        this.startArcAnimation();
       }
     };
 
@@ -76,7 +58,73 @@ export class Statistics implements AfterViewInit {
     maybeStart();
   }
 
-  private animateArc(): void {
+  ngOnDestroy(): void {
+    this.swiperObserver?.disconnect();
+    this.carouselObserver?.disconnect();
+    this.swiper?.destroy(true, true);
+  }
+
+  private observeSwiper(): void {
+    const element = this.swiperRef?.nativeElement;
+    if (!element) {
+      return;
+    }
+
+    const start = () => {
+      if (this.swiper) {
+        return;
+      }
+
+      this.swiper = new Swiper(element, {
+        modules: [EffectCards],
+        effect: 'cards',
+        speed: 450,
+        slidesPerView: 1,
+        cardsEffect: {
+          perSlideOffset: 8,
+          perSlideRotate: 1,
+          slideShadows: false,
+        },
+        grabCursor: true,
+        initialSlide: 1,
+        watchOverflow: true,
+      });
+      this.swiperObserver?.disconnect();
+    };
+
+    if (!('IntersectionObserver' in window)) {
+      start();
+      return;
+    }
+
+    this.swiperObserver = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        start();
+      }
+    }, { rootMargin: '200px 0px' });
+    this.swiperObserver.observe(element);
+  }
+
+  private observeCarousel(): void {
+    const element = this.carouselRef?.nativeElement;
+    if (!element) {
+      return;
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      element.classList.add('is-running');
+      return;
+    }
+
+    this.carouselObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        element.classList.toggle('is-running', entry.isIntersecting);
+      });
+    }, { threshold: 0, rootMargin: '120px 0px' });
+    this.carouselObserver.observe(element);
+  }
+
+  private startArcAnimation(): void {
     if (this.hasAnimated) {
       return;
     }
@@ -92,36 +140,14 @@ export class Statistics implements AfterViewInit {
       return;
     }
 
-    const pathLength = 100;
     const targetPercentage = 68;
     const totalLength = progress.getTotalLength();
-    const start = progress.getPointAtLength(0);
-    const duration = 1200;
+    const end = progress.getPointAtLength((targetPercentage / 100) * totalLength);
 
-    progress.style.strokeDasharray = `0 ${pathLength}`;
-    dot.setAttribute('cx', start.x.toFixed(2));
-    dot.setAttribute('cy', start.y.toFixed(2));
-
+    // Calculate SVG geometry once; CSS handles the frame-by-frame drawing.
+    dot.setAttribute('cx', end.x.toFixed(2));
+    dot.setAttribute('cy', end.y.toFixed(2));
     this.hasAnimated = true;
-    const startTime = performance.now();
-
-    const frame = (now: number) => {
-      const elapsed = now - startTime;
-      const ratio = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - ratio, 3);
-      const visiblePercentage = targetPercentage * eased;
-
-      progress.style.strokeDasharray = `${visiblePercentage} ${pathLength}`;
-
-      const point = progress.getPointAtLength((visiblePercentage / 100) * totalLength);
-      dot.setAttribute('cx', point.x.toFixed(2));
-      dot.setAttribute('cy', point.y.toFixed(2));
-
-      if (ratio < 1) {
-        requestAnimationFrame(frame);
-      }
-    };
-
-    requestAnimationFrame(frame);
+    wrap.classList.add('is-animated');
   }
 }

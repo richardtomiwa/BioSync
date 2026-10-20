@@ -89,6 +89,7 @@ main {
         margin-bottom: -50px;
         overflow: visible;
         position: relative;
+        contain: layout paint;
       }
 
       .swiper-wrapper {
@@ -108,6 +109,7 @@ main {
         width: 100%;
         flex-shrink: 0;
         transform-style: preserve-3d;
+        backface-visibility: hidden;
       }
 
       .stat-card {
@@ -124,6 +126,7 @@ main {
         color: #1a1a1a;
         transform: translateY(-8px);
         overflow: hidden;
+        backface-visibility: hidden;
 
         img {
           height: 100%;
@@ -209,11 +212,10 @@ main {
       .progress {
         stroke: url(#progressGradient);
         stroke-width: 15;
-        stroke-dasharray: 0 100;
-        stroke-dashoffset: 0;
+        stroke-dasharray: 100;
+        stroke-dashoffset: 100;
         transform: translateY(0);
         filter: drop-shadow(0 6px 12px rgba(122, 204, 136, 0.34));
-        will-change: stroke-dasharray;
       }
 
       .dot {
@@ -221,6 +223,20 @@ main {
         stroke: #76d48d;
         stroke-width: 8;
         filter: drop-shadow(0 6px 12px rgba(122, 204, 136, 0.28));
+        opacity: 0;
+        transform-box: fill-box;
+        transform-origin: center;
+        transform: scale(0.6);
+      }
+
+      &.is-animated {
+        .progress {
+          animation: draw-risk-arc 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .dot {
+          animation: reveal-risk-dot 180ms ease-out 1.02s forwards;
+        }
       }
     }
   }
@@ -337,13 +353,21 @@ main {
 
       .up .scroll-container {
         animation: scrollUp 20s linear infinite;
-        will-change: transform;
+        animation-play-state: paused;
         
       }
 
       .down .reverse {
         animation: scrollUp reverse 20s linear infinite;
-        will-change: transform;
+        animation-play-state: paused;
+      }
+
+      &.is-running {
+        .up .scroll-container,
+        .down .reverse {
+          animation-play-state: running;
+          will-change: transform;
+        }
       }
     }
 
@@ -462,6 +486,45 @@ main {
       stroke: #d4aa76;
       stroke-width: 3;
       filter: drop-shadow(0 4px 8px rgba(122, 204, 136, 0.22));
+    }
+  }
+}
+
+@keyframes draw-risk-arc {
+  to {
+    stroke-dashoffset: 32;
+  }
+}
+
+@keyframes reveal-risk-dot {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parent .div3 .arc {
+    .progress {
+      stroke-dashoffset: 32;
+    }
+
+    .dot {
+      opacity: 1;
+      transform: none;
+    }
+
+    &.is-animated .progress,
+    &.is-animated .dot {
+      animation: none;
+    }
+  }
+
+  .parent .div4 .carousel {
+    .up .scroll-container,
+    .down .reverse {
+      animation: none;
+      transform: none;
     }
   }
 }
