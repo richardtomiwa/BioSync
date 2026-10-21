@@ -1,9 +1,9 @@
 import { ChangeDetectorRef, Component, HostListener, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 @Component({
-  imports: [],
+  imports: [RouterLink],
   selector: 'app-navbar',
   styleUrl: './navbar.scss',
   templateUrl: './navbar.html',
@@ -25,6 +25,7 @@ export class Navbar implements OnInit, OnDestroy {
     this.updateRouteState(this.router.url);
     this.routerSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
+        this.closemenu();
         this.updateRouteState(event.urlAfterRedirects);
       }
     });

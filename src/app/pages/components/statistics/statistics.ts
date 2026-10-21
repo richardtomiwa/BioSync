@@ -3,12 +3,13 @@ import Swiper from 'swiper';
 import { EffectCards } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-cards';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-statistics',
   styleUrl: './statistics.scss',
   templateUrl: './statistics.html',
-  imports:[]
+  imports:[RouterLink]
 })
 export class Statistics implements AfterViewInit, OnDestroy {
   @ViewChild('swiperRef') swiperRef!: ElementRef<HTMLDivElement>;
