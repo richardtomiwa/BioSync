@@ -1,5 +1,71 @@
+@use '../components/navbar/navbar.scss' as *;
 @media (max-width: 767px) {
 
+.register{
+margin-top: 100px;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 20px;
 
+.signIn{
+    display: flex;
+    font-family: $body;
+    width: 100%;
+    justify-content: end;
+    align-items: center;
+    gap: 5px;
+
+    span{
+        color: green;
+        text-decoration: underline;
+    }
+}
+
+
+
+.progress{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    position: relative;
+    font-family: $body;
+
+    div:nth-of-type(3){
+       align-items: end;
+    }
+
+       div:nth-of-type(2){
+       align-items: center;
+    }
+    div{
+        display: flex;
+        flex-direction: column;
+        align-items:normal;
+    p{
+        padding: 10px;
+        width: 25px;
+        height: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        color: white;
+        border-radius: 50%;
+        z-index: 1;
+        position: relative;
+        text-align: center;
+    }
+    }
+    hr{
+        width: 100%;
+        color: black;
+        position: absolute;
+        top: 35%;
+        z-index: 0;
+    }
+}
+}
 
 }
