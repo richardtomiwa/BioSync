@@ -1,5 +1,4 @@
 @use '../components/navbar/navbar.scss' as *;
-@media (max-width: 767px) {
 
 .register{
 margin-top: 100px;
@@ -31,9 +30,21 @@ padding: 20px;
     width: 100%;
     position: relative;
     font-family: $body;
+    isolation: isolate;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 22.5px;
+        right: calc(15% + 22.5px);
+        left: calc(15% + 22.5px);
+        height: 1px;
+        background-color: black;
+        z-index: 0;
+    }
 
     div:nth-of-type(3){
-       align-items: end;
+       align-items: center;
     }
 
        div:nth-of-type(2){
@@ -42,9 +53,13 @@ padding: 20px;
     div{
         display: flex;
         flex-direction: column;
-        align-items:normal;
+        align-items:center;
         width: 30%;
+        position: relative;
+        z-index: 1;
+
     p{
+        margin: 0 0 8px;
         padding: 10px;
         width: 25px;
         height: 25px;
@@ -64,14 +79,7 @@ padding: 20px;
         font-size: 14px;
     }
     }
-    hr{
-        width: 100%;
-        color: black;
-        position: absolute;
-        top: 35%;
-        z-index: 0;
-    }
 }
 }
 
-}
+
