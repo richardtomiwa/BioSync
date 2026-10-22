@@ -11,3 +11,32 @@ body.no-scroll{
     overflow: hidden;
     height: 100vh;
 }
+
+/* Move flag container to right */
+.iti--allow-dropdown .iti__flag-container,
+.iti--separate-dial-code .iti__flag-container {
+  right: 0 !important;
+  left: auto !important;
+}
+
+/* Move input padding to left side */
+.iti--allow-dropdown input,
+.iti--allow-dropdown input[type=tel],
+.iti--allow-dropdown input[type=text],
+.iti--separate-dial-code input,
+.iti--separate-dial-code input[type=tel],
+.iti--separate-dial-code input[type=text] {
+  padding-right: 90px !important; /* space for flag on right */
+  padding-left: 10px !important;
+}
+
+/* Dropdown arrow stays visible */
+.iti__arrow {
+  margin-left: 6px;
+}
+
+/* Dropdown list still aligns left */
+.iti__country-list {
+  left: auto !important;
+  right: 0 !important;
+}

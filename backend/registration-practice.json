@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Ada Okafor",
+    "email": "ada.okafor@example.com",
+    "phone": "+2348031234567"
+  },
+  {
+    "name": "Tunde Bello",
+    "email": "tunde.bello@example.com",
+    "phone": "+2348062345678"
+  },
+  {
+    "name": "Amara Eze",
+    "email": "amara.eze@example.com",
+    "phone": "+2348093456789"
+  },
+  {
+    "name": "Chidi Nwosu",
+    "email": "chidi.nwosu@example.com",
+    "phone": "+14155550123"
+  },
+  {
+    "name": "Zainab Musa",
+    "email": "zainab.musa@example.com",
+    "phone": "+2348064451964"
+  }
+]

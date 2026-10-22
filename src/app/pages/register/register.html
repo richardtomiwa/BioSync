@@ -1,22 +1,74 @@
 <main class="register">
-<div class="signIn">
-    <p>Already have an account? </p><span>Sign In</span>
-</div>
-    <div class="progress">
-    
-        <div>
-            <p>1</p>
-            <span>Personal info</span>
-        </div>
-        <div>
-            <p>2</p>
-            <span>Health Details</span>
-        </div>
-        <div>
-            <p>3</p>
-            <span>Complete</span>
-        </div>
-
+  <div class="signIn">
+    <p>Already have an account?</p>
+    <span>Sign In</span>
+  </div>
+  <div class="progress">
+    <div>
+      <p>1</p>
+      <span>Personal info</span>
     </div>
+    <div>
+      <p>2</p>
+      <span>Health Details</span>
+    </div>
+    <div>
+      <p>3</p>
+      <span>Complete</span>
+    </div>
+  </div>
 
+  <div class="header" [formGroup]="myform">
+    <h1>Get Started</h1>
+    <p>
+      Create your BioSync account in minutes. <br />
+      It's free and easy.
+    </p>
+  </div>
+
+  <div class="formwrapper">
+    <form action="" [formGroup]="myform" (keyup)="form()">
+      <div class="name">
+        <label for="name">Full Name*</label>
+        <input type="text" placeholder="Enter your full name" name="name" formControlName="name" />
+
+        @if (
+          myform.get('name')?.invalid && (myform.get('name')?.dirty || myform.get('name')?.touched)
+        ) {
+          <div style="color: red">
+            @if (myform.get('name')?.hasError('minlength')) {
+              <p class="error">Name must be at least 6 characters</p>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="email">
+        <label for="email">Email Address*</label>
+
+        <input
+          type="email"
+          formControlName="email"
+          name="email"
+          placeholder="Enter your email address"
+        />
+        @if (
+          myform.get('email')?.invalid &&
+          (myform.get('email')?.dirty || myform.get('email')?.touched)
+        ) {
+          <div style="color: red">
+            @if (myform.get('email')?.hasError('email')) {
+              <p class="error">Enter a valid email address</p>
+            }
+          </div>
+        }
+      </div>
+      <div class="phone">
+      <label for="phone">Phone Number*</label>
+      <input #phoneInput name="phone" type="tel" formControlName="phone" />
+      </div>
+
+      <button type="submit">Next</button>
+    </form>
+  </div>
 </main>
