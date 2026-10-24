@@ -139,6 +139,17 @@ min-height:calc(100dvh - 100px);
                 color: white;
             }
 
+            div{
+                font-family: $body;
+                margin: 0px;
+                padding: 0px;
+
+                p{
+                    margin: 0px;
+                    font-size: 12px;
+                }
+            }
+
 
         }
                     button{

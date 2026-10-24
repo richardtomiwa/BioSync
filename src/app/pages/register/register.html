@@ -27,18 +27,24 @@
   </div>
 
   <div class="formwrapper">
-    <form action="" [formGroup]="myform" (keyup)="form()">
+    <form action="" [formGroup]="myform">
       <div class="name">
         <label for="name">Full Name*</label>
-        <input type="text" placeholder="Enter your full name" name="name" formControlName="name" />
+        <input type="text" placeholder="Enter your full name" name="name" id="name" autocomplete="name" formControlName="name" />
 
         @if (
           myform.get('name')?.invalid && (myform.get('name')?.dirty || myform.get('name')?.touched)
         ) {
           <div style="color: red">
             @if (myform.get('name')?.hasError('minlength')) {
-              <p class="error">Name must be at least 6 characters</p>
+              <p class="error">Name must be at least 3 characters</p>
             }
+          </div>
+        }
+
+        @if (myform.get('name')?.value == '' && myform.get('name')?.touched) {
+          <div style="color: red">
+            <p>Please fill in your Fullname</p>
           </div>
         }
       </div>
@@ -50,6 +56,8 @@
           type="email"
           formControlName="email"
           name="email"
+          id="email"
+          autocomplete="email"
           placeholder="Enter your email address"
         />
         @if (
@@ -62,13 +70,35 @@
             }
           </div>
         }
+
+        @if (myform.get('email')?.value == '' && myform.get('email')?.touched) {
+          <div style="color: red">
+            <p>Please fill in your Email address</p>
+          </div>
+        }
       </div>
       <div class="phone">
-      <label for="phone">Phone Number*</label>
-      <input #phoneInput name="phone" type="tel" formControlName="phone" />
+        <label for="phone">Phone Number*</label>
+        <input #phoneInput name="phone" id="phone" autocomplete="tel" type="tel" formControlName="phone" />
+        @if (
+          (myform.get('phone')?.dirty || myform.get('phone')?.touched) &&
+          myform.get('phone')?.value != ''
+        ) {
+          <div style="color: red">
+            @if (!phoneerror) {
+              <p>Incorrect number format</p>
+            }
+          </div>
+        }
+
+        @if (myform.get('phone')?.value == '' && myform.get('phone')?.touched) {
+          <div style="color: red">
+            <p>Please fill in your phone number</p>
+          </div>
+        }
       </div>
 
-      <button type="submit">Next</button>
+      <button type="submit" (click)="onsubmit()">Next</button>
     </form>
   </div>
 </main>

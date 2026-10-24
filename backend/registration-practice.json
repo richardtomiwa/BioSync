@@ -1,27 +1,41 @@
-[
-  {
-    "name": "Ada Okafor",
-    "email": "ada.okafor@example.com",
-    "phone": "+2348031234567"
-  },
-  {
-    "name": "Tunde Bello",
-    "email": "tunde.bello@example.com",
-    "phone": "+2348062345678"
-  },
-  {
-    "name": "Amara Eze",
-    "email": "amara.eze@example.com",
-    "phone": "+2348093456789"
-  },
-  {
-    "name": "Chidi Nwosu",
-    "email": "chidi.nwosu@example.com",
-    "phone": "+14155550123"
-  },
-  {
-    "name": "Zainab Musa",
-    "email": "zainab.musa@example.com",
-    "phone": "+2348064451964"
-  }
-]
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Ada Okafor",
+      "email": "ada.okafor@example.com",
+      "phone": "+2348031234567"
+    },
+    {
+      "id": "2",
+      "name": "Tunde Bello",
+      "email": "tunde.bello@example.com",
+      "phone": "+2348062345678"
+    },
+    {
+      "id": "3",
+      "name": "Amara Eze",
+      "email": "amara.eze@example.com",
+      "phone": "+2348093456789"
+    },
+    {
+      "id": "4",
+      "name": "Chidi Nwosu",
+      "email": "chidi.nwosu@example.com",
+      "phone": "+14155550123"
+    },
+    {
+      "id": "5",
+      "name": "Zainab Musa",
+      "email": "zainab.musa@example.com",
+      "phone": "+2348064451964"
+    },
+    {
+      "id": "jY-IGXhykzU",
+      "name": "Richard Oladipo",
+      "email": "inisagrammarschool.com@gmail.com",
+      "phone": "+2349138163420"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
