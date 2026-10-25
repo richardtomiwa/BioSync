@@ -6,6 +6,7 @@ import {
   inject,
   PLATFORM_ID,
   OnInit,
+  signal,
 } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 import { isPlatformBrowser } from '@angular/common';
@@ -31,12 +32,15 @@ export class Register implements AfterViewInit, OnInit {
   private readonly platformId = inject(PLATFORM_ID);
   private http = inject(HttpClient);
   myform!: FormGroup;
-  phoneerror = '';
+  phoneerror: boolean | null = false;
+  loading=false;
+  isready=signal(false);
 
   @ViewChild('phoneInput') phoneInput!: ElementRef<HTMLInputElement>;
   iti: any;
 
   ngOnInit() {
+    this.loading=false;
     this.myform = new FormGroup({
       name: new FormControl('', {
         validators: [Validators.required, Validators.minLength(3)],
@@ -44,8 +48,10 @@ export class Register implements AfterViewInit, OnInit {
       email: new FormControl('', {
         validators: [Validators.required, Validators.email],
       }),
-      phone: new FormControl(''),
+      phone: new FormControl('', Validators.required),
     });
+
+
   }
 
   totitlecase(value: string): string {
@@ -56,12 +62,17 @@ export class Register implements AfterViewInit, OnInit {
       .join(' ');
   }
 
-  async onsubmit() {
+  async onsubmit(event: Event) {
+    event.preventDefault();
     this.myform.markAllAsTouched();
-    if (!this.phoneerror || this.myform.invalid) {
+    // Recheck validity here as well as disabling the button: submit events can
+    // also come from pressing Enter or being dispatched programmatically.
+    if (!this.isready() || this.loading || this.myform.invalid || this.phoneerror !== true) {
       return;
-    } else {
-      try{
+    }
+
+    this.loading = true;
+    try {
       const user = await firstValueFrom(
         this.http.get<any[]>('http://localhost:3000/users?_sort=-id'),
       );
@@ -82,17 +93,21 @@ export class Register implements AfterViewInit, OnInit {
       const record = await firstValueFrom(this.http.post<any>('http://localhost:3000/users', body));
       this.myform.reset();
       this.iti.setNumber("");
-      this.phoneerror="";
+      this.phoneerror = false;
       this.myform.markAsUntouched();
       this.myform.markAsPristine();
 
-    }catch(error){
-      console.log("save failed")
-    }
+      this.loading = false;
+    } catch (error) {
+      console.log('save failed', error);
+      this.loading = false;
     }
   }
 
   ngAfterViewInit() {
+        this.loading=false;
+
+
     // intl-tel-input accesses document and can only initialize in the browser.
     if (!isPlatformBrowser(this.platformId)) return;
 
@@ -110,8 +125,14 @@ export class Register implements AfterViewInit, OnInit {
       this.updateFormValue();
     });
 
-    // getNumber() needs the utils script; sync again once it has loaded.
-    this.iti.promise?.then(() => this.updateFormValue());
+    // The phone widget is initialized now. Do not tie button visibility to the
+    // separately downloaded utils script, which may be slow on throttled networks.
+    this.isready.set(true);
+
+    // getNumber() needs the utils script, so refresh the form value when it loads.
+    this.iti.promise?.then(() => this.updateFormValue()).catch((err: unknown) => {
+      console.error('Phone number utilities failed to load', err);
+    });
   }
 
   updateFormValue() {

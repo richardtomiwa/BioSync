@@ -119,6 +119,16 @@ min-height:calc(100dvh - 100px);
         flex-direction: column;
         width: 100%;
         gap: 15px;
+        .form-fields{
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            min-width: 0;
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
         div{
             display: flex;
             flex-direction: column;
@@ -161,6 +171,11 @@ min-height:calc(100dvh - 100px);
                 border: none;
                 background: rgb(43, 167, 68);
                 color: white;
+                
+            }
+
+            .submit{
+                display: inline-block;
             }
     }
 }
