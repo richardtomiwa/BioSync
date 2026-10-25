@@ -33,14 +33,15 @@ export class Register implements AfterViewInit, OnInit {
   private http = inject(HttpClient);
   myform!: FormGroup;
   phoneerror: boolean | null = false;
-  loading=false;
+  loading = signal(false);
+  submitError = signal('');
   isready=signal(false);
 
   @ViewChild('phoneInput') phoneInput!: ElementRef<HTMLInputElement>;
   iti: any;
 
   ngOnInit() {
-    this.loading=false;
+    this.loading.set(false);
     this.myform = new FormGroup({
       name: new FormControl('', {
         validators: [Validators.required, Validators.minLength(3)],
@@ -67,11 +68,12 @@ export class Register implements AfterViewInit, OnInit {
     this.myform.markAllAsTouched();
     // Recheck validity here as well as disabling the button: submit events can
     // also come from pressing Enter or being dispatched programmatically.
-    if (!this.isready() || this.loading || this.myform.invalid || this.phoneerror !== true) {
+    if (!this.isready() || this.loading() || this.myform.invalid || this.phoneerror !== true) {
       return;
     }
 
-    this.loading = true;
+    this.submitError.set('');
+    this.loading.set(true);
     try {
       const user = await firstValueFrom(
         this.http.get<any[]>('http://localhost:3000/users?_sort=-id'),
@@ -97,15 +99,16 @@ export class Register implements AfterViewInit, OnInit {
       this.myform.markAsUntouched();
       this.myform.markAsPristine();
 
-      this.loading = false;
     } catch (error) {
       console.log('save failed', error);
-      this.loading = false;
+      this.submitError.set('Submission was not successful. Please try again.');
+    } finally {
+      this.loading.set(false);
     }
   }
 
   ngAfterViewInit() {
-        this.loading=false;
+        this.loading.set(false);
 
 
     // intl-tel-input accesses document and can only initialize in the browser.

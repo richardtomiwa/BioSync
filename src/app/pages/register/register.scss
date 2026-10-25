@@ -177,6 +177,13 @@ min-height:calc(100dvh - 100px);
             .submit{
                 display: inline-block;
             }
+
+            .submit-error{
+                margin: 0;
+                color: #ff7777;
+                font-size: 13px;
+                text-align: center;
+            }
     }
 }
 
