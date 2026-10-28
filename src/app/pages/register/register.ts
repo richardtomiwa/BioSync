@@ -13,6 +13,7 @@ import { isPlatformBrowser } from '@angular/common';
 import intlTelInput from 'intl-tel-input';
 import { HttpClient, httpResource } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 export interface User {
   id: number;
@@ -29,6 +30,9 @@ export interface User {
   templateUrl: './register.html',
 })
 export class Register implements AfterViewInit, OnInit {
+    constructor(private title: Title){
+    this.title.setTitle("BioSync - Get Started")
+  }
   private readonly platformId = inject(PLATFORM_ID);
   private http = inject(HttpClient);
   myform!: FormGroup;

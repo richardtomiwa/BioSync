@@ -1,16 +1,16 @@
 @use '../components/navbar/navbar.scss' as *;
 
-.register{
-background-color:#0a1613;
-color: white;
-margin-top: 100px;
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: 20px;
-min-height:calc(100dvh - 100px);
+.register {
+  background-color: #0a1613;
+  color: white;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: calc(100dvh - 100px);
 
-.signIn{
+  .signIn {
     display: flex;
     font-family: $body;
     width: 100%;
@@ -18,15 +18,13 @@ min-height:calc(100dvh - 100px);
     align-items: center;
     gap: 5px;
 
-    span{
-        color: green;
-        text-decoration: underline;
+    span {
+      color: green;
+      text-decoration: underline;
     }
-}
+  }
 
-
-
-.progress{
+  .progress {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -36,32 +34,40 @@ min-height:calc(100dvh - 100px);
     isolation: isolate;
 
     &::before {
-        content: '';
-        position: absolute;
-        top: 18.5px;
-        right: calc(15% + 15.5px);
-        left: calc(15% + 15.5px);
-        height: 1px;
-        background-color:rgb(7, 88, 7);
-        z-index: 0;
+      content: '';
+      position: absolute;
+      top: 18.5px;
+      right: calc(15% + 15.5px);
+      left: calc(15% + 15.5px);
+      height: 1px;
+      background-color: rgb(7, 88, 7);
+      z-index: 0;
     }
 
-    div:nth-of-type(3){
-       align-items: center;
+    div:nth-of-type(3) {
+      align-items: center;
+      p {
+        background-color: black;
+        color: white;
+      }
     }
 
-       div:nth-of-type(2){
-       align-items: center;
+    div:nth-of-type(2) {
+      align-items: center;
+      p {
+        background-color: black;
+        color: white;
+      }
     }
-    div{
-        display: flex;
-        flex-direction: column;
-        align-items:center;
-        width: 30%;
-        position: relative;
-        z-index: 1;
+    div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 30%;
+      position: relative;
+      z-index: 1;
 
-    p{
+      p {
         margin: 0 0 8px;
         padding: 10px;
         width: 15px;
@@ -76,118 +82,157 @@ min-height:calc(100dvh - 100px);
         z-index: 1;
         position: relative;
         text-align: center;
+      }
 
-    }
-
-    span{
+      span {
         font-size: 14px;
+      }
     }
-    }
-}
+  }
 
-
-.header{
+  .header {
     width: 100%;
     display: flex;
     flex-direction: column;
     margin: 20px 0px 20px 0px;
 
-    h1{
-        margin: 0px;
-        font-size: 28px;
-        font-weight: 450;
-        font-family: $heading;
+    h1 {
+      margin: 0px;
+      font-size: 28px;
+      font-weight: 450;
+      font-family: $heading;
     }
 
-    p{
-        margin: 0px;
-        font-size: 14px;
-        font-weight: 450;
-        font-family: $body;
-        color: gray;
+    p {
+      margin: 0px;
+      font-size: 14px;
+      font-weight: 450;
+      font-family: $body;
+      color: gray;
     }
-}
+  }
 
-.formwrapper{
+  .formwrapper {
     display: flex;
     flex-direction: column;
     font-family: $body;
-        width: 100%;
+    width: 100%;
 
-    form{
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 15px;
+      .form-fields {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+      div {
         display: flex;
         flex-direction: column;
         width: 100%;
-        gap: 15px;
-        .form-fields{
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            width: 100%;
-            min-width: 0;
-            margin: 0;
-            padding: 0;
-            border: 0;
+        gap: 5px;
+        label {
+          font-size: 12px;
         }
-        div{
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            gap: 5px;
-            label{
-                font-size: 12px;
-            }
-            input{
-                width: 100%;
-                height: 40px;
-                border-radius: 12px;
-                outline: none;
-                border: 2px solid #142b25 ;
-                box-sizing: border-box;
-                padding: 5px 10px;
-                background: transparent;
-                color: white;
-            }
-
-            div{
-                font-family: $body;
-                margin: 0px;
-                padding: 0px;
-
-                p{
-                    margin: 0px;
-                    font-size: 12px;
-                }
-            }
-
-
+        input {
+          width: 100%;
+          height: 40px;
+          border-radius: 12px;
+          outline: none;
+          border: 2px solid #142b25;
+          box-sizing: border-box;
+          padding: 5px 10px;
+          background: transparent;
+          color: white;
         }
-                    button{
-                width: 100%;
-                box-sizing: border-box;
-                padding: 12px 5px;
-                border-radius: 24px;
-                outline: none;
-                border: none;
+
+        div {
+          font-family: $body;
+          margin: 0px;
+          padding: 0px;
+
+          p {
+            margin: 0px;
+            font-size: 12px;
+          }
+        }
+      }
+      button {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 5px;
+        border-radius: 24px;
+        outline: none;
+        border: none;
+        background: rgb(43, 167, 68);
+        color: white;
+      }
+
+      button:disabled{
                 background: rgb(43, 167, 68);
-                color: white;
-                
-            }
+                filter: opacity(0.2);
+      }
 
-            .submit{
-                display: inline-block;
-            }
+      .submit {
+        display: inline-block;
+      }
 
-            .submit-error{
-                margin: 0;
-                color: #ff7777;
-                font-size: 13px;
-                text-align: center;
-            }
+      .submit-error {
+        margin: 0;
+        color: #ff7777;
+        font-size: 13px;
+        text-align: center;
+      }
     }
+  }
 }
 
+@media (min-width: 767px) {
+  .register {
+    .signIn {
+      width: 50%;
+    }
 
+    .progress {
+      width: 50%;
+    }
+
+    .header {
+      width: 50%;
+      h1 {
+        font-size: 38px;
+      }
+
+      p {
+        font-size: 18px;
+      }
+    }
+
+    .formwrapper {
+      width: 50%;
+
+      form {
+        gap: 20px;
+
+        div {
+          gap: 15px;
+
+          label {
+            font-size: 16px;
+          }
+
+          input {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
 }
-
-

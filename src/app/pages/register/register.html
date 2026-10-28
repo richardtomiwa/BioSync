@@ -36,15 +36,19 @@
         @if (
           myform.get('name')?.invalid && (myform.get('name')?.dirty || myform.get('name')?.touched)
         ) {
-          <div style="color: red">
+          <div style="color: #ff7777">
             @if (myform.get('name')?.hasError('minlength')) {
               <p class="error">Name must be at least 3 characters</p>
             }
           </div>
+        } @else {
+                    <div style="display: none;">
+
+          </div>
         }
 
         @if (myform.get('name')?.value == '' && myform.get('name')?.touched) {
-          <div style="color: red">
+          <div style="color: #ff7777">
             <p>Please fill in your Fullname</p>
           </div>
         }
@@ -65,7 +69,7 @@
           myform.get('email')?.invalid &&
           (myform.get('email')?.dirty || myform.get('email')?.touched)
         ) {
-          <div style="color: red">
+          <div style="color: #ff7777">
             @if (myform.get('email')?.hasError('email')) {
               <p class="error">Enter a valid email address</p>
             }
@@ -73,7 +77,7 @@
         }
 
         @if (myform.get('email')?.value == '' && myform.get('email')?.touched) {
-          <div style="color: red">
+          <div style="color: #ff7777">
             <p>Please fill in your Email address</p>
           </div>
         }
@@ -85,7 +89,7 @@
           (myform.get('phone')?.dirty || myform.get('phone')?.touched) &&
           myform.get('phone')?.value != ''
         ) {
-          <div style="color: red">
+          <div style="color: #ff7777">
             @if (!phoneerror) {
               <p>Incorrect number format</p>
             }
@@ -93,7 +97,7 @@
         }
 
         @if (myform.get('phone')?.value == '' && myform.get('phone')?.touched) {
-          <div style="color: red">
+          <div style="color: #ff7777">
             <p>Please fill in your phone number</p>
           </div>
         }
